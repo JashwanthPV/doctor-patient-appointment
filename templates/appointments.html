@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Appointments</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Appointments</h1>
+
+        {% if user_type == "patient" %}
+        <form method="POST">
+            <input type="text" name="doctor" placeholder="Doctor's Name" required>
+            <input type="datetime-local" name="time" required>
+            <button type="submit">Book Appointment</button>
+        </form>
+        {% endif %}
+
+        <h2>Scheduled Appointments</h2>
+        <ul>
+            {% for appointment in appointments %}
+            <li>{{ appointment.doctor }} with {{ appointment.patient }} at {{ appointment.time }}</li>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ url_for('dashboard') }}">Back</a>
+    </div>
+</body>
+</html>
